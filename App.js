@@ -1,51 +1,33 @@
-/* eslint-disable no-undef */
-import ExpanceItem from "./components/ExpanceItem";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
-const expances = [
-  {
-    title: "Food",
-    amount: 10,
-    LocationOfExpenditure: "Kolkata",
-  },
+import "./index.css";
+import Expenses from "./components/Expenses/Expenses";
+import Header from "./components/Header/Header";
+import SignUp from "./auth/SignUp";
 
-  {
-    title: "Petrol",
-    amount: 100,
-    LocationOfExpenditure: "Delhi",
-  },
-
-  {
-    title: "Movies",
-    amount: 200,
-    LocationOfExpenditure: "Mumbai",
-  },
-];
-
-
-
-function App(props) {
+const App = () => {
   return (
-    <div>
-      <h2>Expance Items</h2>
-      <ExpanceItem
-        title={expances[0].title}
-        amount={expances[0].amount}
-        LocationOfExpenditure={expances[0].LocationOfExpenditure}
-      />
+    <Router>
+      <div className="app">
+        <Header />
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to='/product'/>
+            <SignUp/>
+          </Route>
 
-      <ExpanceItem
-        title={expances[1].title}
-        amount={expances[1].amount}
-        LocationOfExpenditure={expances[1].LocationOfExpenditure}
-      />
+          <Route path="/product">
+            <Expenses />
+          </Route>
 
-      <ExpanceItem
-        title={expances[2].title}
-        amount={expances[2].amount}
-        LocationOfExpenditure={expances[2].LocationOfExpenditure}
-      />
-    </div>
+          <Route path='/signup'>
+            <SignUp/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
